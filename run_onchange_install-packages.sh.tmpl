@@ -23,9 +23,6 @@ brew install --cask alacritty
 brew install vim neovim
 {{ end -}}
 
-# change git tree layout
-git config --global alias.tree 'git log --graph --pretty=format:'%x09%C(auto) %h %Cgreen %ar %Creset%x09by"%C(cyan ul)%an%Creset" %x09%C(auto)%s %d"'
-
 # We use Alacritty's default Linux config directory as our storage location here.
 mkdir -p ~/.config/alacritty/themes
 git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
