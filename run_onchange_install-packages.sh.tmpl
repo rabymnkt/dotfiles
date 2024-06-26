@@ -24,7 +24,7 @@ brew install vim neovim
 {{ end -}}
 
 # change git tree layout
-git config --global alias.tree "git log --graph --pretty=format:'%x09%C(auto) %h %Cgreen %ar %Creset%x09by"%C(cyan ul)%an%Creset" %x09%C(auto)%s %d'"
+git config --global alias.tree 'git log --graph --pretty=format:'%x09%C(auto) %h %Cgreen %ar %Creset%x09by"%C(cyan ul)%an%Creset" %x09%C(auto)%s %d"'
 
 # We use Alacritty's default Linux config directory as our storage location here.
 mkdir -p ~/.config/alacritty/themes
@@ -35,6 +35,14 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.c
 
 # instal Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+source ~/.bashrc
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+source ~/.zshrc
+{{ end -}}
 
 # install Zellij using cargo
 cargo install --locked zellij
