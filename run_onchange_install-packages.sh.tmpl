@@ -1,0 +1,11 @@
+{{ if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+sudo apt install ripgrep
+{{ else if eq .chezmoi.os "darwin" -}}
+#!/bin/sh
+brew install ripgrep
+{{ end -}}
+
+# We use Alacritty's default Linux config directory as our storage location here.
+mkdir -p ~/.config/alacritty/themes
+git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
