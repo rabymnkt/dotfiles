@@ -1,11 +1,40 @@
 {{ if eq .chezmoi.os "linux" -}}
 #!/bin/sh
-sudo apt install ripgrep
+
+sudo apt update
+sudo apt upgrade
+sudo apt install build-essential
+sudo apt install ripgrep curl
+
+sudo apt install vim
+
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+mkdir -p /opt/nvim
+mv nvim.appimage /opt/nvim/nvim
+echo export PATH="$PATH:/opt/nvim/" >> ~/.bashrc
+
 {{ else if eq .chezmoi.os "darwin" -}}
 #!/bin/sh
-brew install ripgrep
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install zsh-syntax-highlighting
+# brew install zellij
+brew install --cask alacritty
+brew install vim neovim
 {{ end -}}
+
+# change git tree layout
+git config --global alias.tree "git log --graph --pretty=format:'%x09%C(auto) %h %Cgreen %ar %Creset%x09by"%C(cyan ul)%an%Creset" %x09%C(auto)%s %d'"
 
 # We use Alacritty's default Linux config directory as our storage location here.
 mkdir -p ~/.config/alacritty/themes
 git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
+
+# install vim-plug for vim plugins (install plugins using :PlugInstall)
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# instal Rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# install Zellij using cargo
+cargo install --locked zellij
