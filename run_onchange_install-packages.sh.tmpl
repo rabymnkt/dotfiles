@@ -11,7 +11,7 @@ sudo apt install vim
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
 sudo mkdir -p /opt/nvim
-mv nvim.appimage /opt/nvim/nvim
+sudo mv nvim.appimage /opt/nvim/nvim
 echo export PATH="$PATH:/opt/nvim/" >> ~/.bashrc
 
 {{ else if eq .chezmoi.os "darwin" -}}
