@@ -1,5 +1,20 @@
 {{ if eq .chezmoi.os "linux" -}}
-#!/bin/sh
+#!/bin/bash
+echo -n "install packages? [Y/n]: "
+read ANS
+
+case $ANS in
+  "" | [Yy]* )
+    # 「Yes」の場合の処理
+    echo install packages...
+    ;;
+  * )
+    # 「No」の場合の処理
+    echo abort
+    exit 0
+    ;;
+esac
+
 
 sudo apt update
 sudo apt upgrade
@@ -15,7 +30,16 @@ sudo mv nvim.appimage /opt/nvim/nvim
 echo export PATH="$PATH:/opt/nvim/" >> ~/.bashrc
 
 {{ else if eq .chezmoi.os "darwin" -}}
-#!/bin/sh
+#!/bin/zsh
+
+echo "install packages? (y/N): "
+if read -q; then
+    echo install packages...
+else
+    echo abort.
+    exit 0
+fi
+
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install zsh-syntax-highlighting
 # brew install zellij
