@@ -48,6 +48,11 @@ vim.opt.mouse = "a"
 -- leader key 変更
 vim.g.mapleader = " "
 
+-- ウィンドウの透明度設定
+vim.opt.termguicolors = true
+vim.opt.winblend = 5
+vim.opt.pumblend = 5
+
 -- 空白のハイライト
 vim.api.nvim_create_augroup("extra-whitespace", {})
 vim.api.nvim_create_autocmd({ "VimEnter", "WinEnter" }, {
