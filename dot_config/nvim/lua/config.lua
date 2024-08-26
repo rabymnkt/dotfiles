@@ -9,17 +9,17 @@ local lualine = require("lualine")
 -- Color table for highlights
 -- stylua: ignore
 local colors = {
-  bg       = '#202328',
-  fg       = '#bbc2cf',
-  yellow   = '#ECBE7B',
-  cyan     = '#008080',
-  darkblue = '#081633',
-  green    = '#98be65',
-  orange   = '#FF8800',
-  violet   = '#a9a1e1',
-  magenta  = '#c678dd',
-  blue     = '#51afef',
-  red      = '#ec5f67',
+    bg       = '#202328',
+    fg       = '#bbc2cf',
+    yellow   = '#ECBE7B',
+    cyan     = '#008080',
+    darkblue = '#081633',
+    green    = '#98be65',
+    orange   = '#FF8800',
+    violet   = '#a9a1e1',
+    magenta  = '#c678dd',
+    blue     = '#51afef',
+    red      = '#ec5f67',
 }
 
 local conditions = {
@@ -85,7 +85,7 @@ ins_left({
     function()
         return "▊"
     end,
-    color = { fg = colors.blue }, -- Sets highlighting of component
+    color = { fg = colors.blue },      -- Sets highlighting of component
     padding = { left = 0, right = 1 }, -- We don't need space before this
 })
 
@@ -181,7 +181,7 @@ ins_left({
 
 -- Add components to right sections
 ins_right({
-    "o:encoding", -- option component same as &encoding in viml
+    "o:encoding",       -- option component same as &encoding in viml
     fmt = string.upper, -- I'm not sure why it's upper case either ;)
     cond = conditions.hide_in_width,
     color = { fg = colors.green, gui = "bold" },
@@ -361,18 +361,18 @@ require("neo-tree").setup({
     enable_diagnostics = true,
     neo_tree_popup_input_ready = false, -- Enable normal mode for input dialogs.
     event_handlers = {
-      {
-        event = "neo_tree_popup_input_ready",
-        ---@param input NuiInput
-        handler = function(input)
-          -- enter input popup with normal mode by default.
-          vim.cmd("stopinsert")
-        end,
-      }
+        {
+            event = "neo_tree_popup_input_ready",
+            ---@param input NuiInput
+            handler = function(input)
+                -- enter input popup with normal mode by default.
+                vim.cmd("stopinsert")
+            end,
+        }
     },
     open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-    sort_case_insensitive = false, -- used when sorting files and directories in the tree
-    sort_function = nil, -- use a custom function for sorting files and directories in the tree
+    sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
+    sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
     -- sort_function = function (a,b)
     --       if a.type == b.type then
     --           return a.path > b.path
@@ -458,7 +458,7 @@ require("neo-tree").setup({
     commands = {},
     window = {
         position = "left",
-        width = 40,
+        width = 30,
         mapping_options = {
             noremap = true,
             nowait = true,
@@ -543,11 +543,11 @@ require("neo-tree").setup({
             },
         },
         follow_current_file = {
-            enabled = false, -- This will find and focus the file in the active buffer every time
+            enabled = false,                    -- This will find and focus the file in the active buffer every time
             --               -- the current file is changed while the tree is open.
-            leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+            leave_dirs_open = false,            -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
         },
-        group_empty_dirs = false, -- when true, empty folders will be grouped together
+        group_empty_dirs = false,               -- when true, empty folders will be grouped together
         hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
         -- in whatever position is specified in window.position
         -- "open_current",  -- netrw disabled, opening a directory opens within the
@@ -589,11 +589,11 @@ require("neo-tree").setup({
     },
     buffers = {
         follow_current_file = {
-            enabled = true, -- This will find and focus the file in the active buffer every time
+            enabled = true,          -- This will find and focus the file in the active buffer every time
             --              -- the current file is changed while the tree is open.
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
         },
-        group_empty_dirs = true, -- when true, empty folders will be grouped together
+        group_empty_dirs = true,     -- when true, empty folders will be grouped together
         show_unloaded = true,
         window = {
             mappings = {
@@ -641,9 +641,9 @@ vim.cmd([[nnoremap <C-d> :Neotree toggle=true<cr>]])
 require("tokyonight").setup({
     -- your configuration comes here
     -- or leave it empty to use the default settings
-    style = "Night", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-    light_style = "day", -- The theme is used when the background is set to light
-    transparent = true, -- Enable this to disable setting the background color
+    style = "Night",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+    light_style = "day",    -- The theme is used when the background is set to light
+    transparent = true,     -- Enable this to disable setting the background color
     terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
     styles = {
         -- Style to be applied to different syntax groups
@@ -654,15 +654,15 @@ require("tokyonight").setup({
         variables = {},
         -- Background styles. Can be "dark", "transparent" or "normal"
         sidebars = "dark", -- style for sidebars, see below
-        floats = "dark", -- style for floating windows
+        floats = "dark",   -- style for floating windows
         -- sidebars = "transparent", -- style for sidebars, see below
         -- floats = "transparent", -- style for floating windows
     },
-    sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-    day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+    sidebars = { "qf", "help" },      -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+    day_brightness = 0.3,             -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
     hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-    dim_inactive = false, -- dims inactive windows
-    lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
+    dim_inactive = false,             -- dims inactive windows
+    lualine_bold = false,             -- When `true`, section headers in the lualine theme will be bold
 
     --- You can override specific color groups to use other groups or a hex color
     --- function will be called with a ColorScheme table
@@ -706,9 +706,9 @@ require("mason-lspconfig").setup_handlers({
 require("telescope").load_extension("noice")
 require("noice").setup({
     cmdline = {
-        enabled = true, -- enables the Noice cmdline UI
+        enabled = true,         -- enables the Noice cmdline UI
         view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-        opts = {}, -- global options for the cmdline. See section on views
+        opts = {},              -- global options for the cmdline. See section on views
         ---@type table<string, CmdlineFormat>
         format = {
             -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
@@ -729,15 +729,15 @@ require("noice").setup({
     messages = {
         -- NOTE: If you enable messages, then the cmdline is enabled automatically.
         -- This is a current Neovim limitation.
-        enabled = true, -- enables the Noice messages UI
-        view = "notify", -- default view for messages
-        view_error = "notify", -- view for errors
-        view_warn = "notify", -- view for warnings
-        view_history = "messages", -- view for :messages
+        enabled = true,              -- enables the Noice messages UI
+        view = "notify",             -- default view for messages
+        view_error = "notify",       -- view for errors
+        view_warn = "notify",        -- view for warnings
+        view_history = "messages",   -- view for :messages
         view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
     },
     popupmenu = {
-        enabled = true, -- enables the Noice popupmenu UI
+        enabled = true,  -- enables the Noice popupmenu UI
         ---@type 'nui'|'cmp'
         backend = "nui", -- backend to use to show regular cmdline completions
         ---@type NoicePopupmenuItemKind|false
@@ -764,7 +764,7 @@ require("noice").setup({
                     { error = true },
                     { warning = true },
                     { event = "msg_show", kind = { "" } },
-                    { event = "lsp", kind = "message" },
+                    { event = "lsp",      kind = "message" },
                 },
             },
         },
@@ -778,7 +778,7 @@ require("noice").setup({
                     { error = true },
                     { warning = true },
                     { event = "msg_show", kind = { "" } },
-                    { event = "lsp", kind = "message" },
+                    { event = "lsp",      kind = "message" },
                 },
             },
             filter_opts = { count = 1 },
@@ -824,9 +824,9 @@ require("noice").setup({
         hover = {
             enabled = true,
             silent = false, -- set to true to not show a message if hover is not available
-            view = nil, -- when nil, use defaults from documentation
+            view = nil,     -- when nil, use defaults from documentation
             ---@type NoiceViewOptions
-            opts = {}, -- merged with defaults from documentation
+            opts = {},      -- merged with defaults from documentation
         },
         signature = {
             enabled = true,
@@ -834,11 +834,11 @@ require("noice").setup({
                 enabled = true,
                 trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
                 luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
-                throttle = 50, -- Debounce lsp signature help request by 50ms
+                throttle = 50,  -- Debounce lsp signature help request by 50ms
             },
-            view = nil, -- when nil, use defaults from documentation
+            view = nil,         -- when nil, use defaults from documentation
             ---@type NoiceViewOptions
-            opts = {}, -- merged with defaults from documentation
+            opts = {},          -- merged with defaults from documentation
         },
         message = {
             -- Messages shown by lsp servers
@@ -861,7 +861,7 @@ require("noice").setup({
     },
     markdown = {
         hover = {
-            ["|(%S-)|"] = vim.cmd.help, -- vim help links
+            ["|(%S-)|"] = vim.cmd.help,                       -- vim help links
             ["%[.-%]%((%S-)%)"] = require("noice.util").open, -- markdown links
         },
         highlights = {
@@ -886,13 +886,13 @@ require("noice").setup({
     presets = {
         -- you can enable a preset by setting it to true, or a table that will override the preset config
         -- you can also add custom presets that you can enable/disable with enabled=true
-        bottom_search = true, -- use a classic bottom cmdline for search
-        command_palette = true, -- position the cmdline and popupmenu together
+        bottom_search = true,         -- use a classic bottom cmdline for search
+        command_palette = true,       -- position the cmdline and popupmenu together
         long_message_to_split = true, -- long messages will be sent to a split
-        inc_rename = false, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
+        inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = false,       -- add a border to hover docs and signature help
     },
-    throttle = 1000 / 30, -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
+    throttle = 1000 / 30,             -- how frequently does Noice need to check for ui updates? This has no effect when in blocking mode.
     ---@type NoiceConfigViews
     views = {}, ---@see section on views
     ---@type NoiceRouteConfig[]
@@ -1012,8 +1012,8 @@ require("conform").formatters.my_formatter = {
 ---
 require("toggleterm").setup({
     open_mapping = [[<c-\>]],
-    hide_numbers = true, -- hide the number column in toggleterm buffers
-    autochdir = false, -- when neovim changes it current directory the terminal will change it's own when next it's opened
+    hide_numbers = true,  -- hide the number column in toggleterm buffers
+    autochdir = false,    -- when neovim changes it current directory the terminal will change it's own when next it's opened
     start_in_insert = true,
     close_on_exit = true, -- close the terminal window when the process exits
     -- Change the default shell. Can be a string or a function returning a string
