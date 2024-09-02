@@ -1,0 +1,432 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+snippet lualatex "lualatex template"
+
+\documentclass[a4paper,10pt]{ltjsarticle}
+
+% パッケージについて https://qiita.com/mo-mo-666/items/2686488fc29c5a37832b#32-%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88
+
+% 表示の形式を変更
+\usepackage{geometry}
+\geometry{left=25mm, right=25mm, top=10mm, bottom=30mm}
+
+% 数式系
+\usepackage{amsthm,amsmath,amssymb,amsfonts}
+\usepackage{latexsym}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+
+% 画像系
+\usepackage{graphicx,xcolor}
+% 図や表の配置関係
+\usepackage{float}
+% 図を回り込ませる
+\usepackage{wrapfig}
+
+% 英字フォントの設定
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% 数式で太字を使う
+\usepackage{bm}
+
+% amsthmを用いた定理環境
+% 英語のとき
+\theoremstyle{plain}
+\newtheorem{Thm}{Theorem}[section]
+\newtheorem{Lem}[Thm]{Lemma}
+\newtheorem{Prop}[Thm]{Proposition}
+\newtheorem{Cor}[Thm]{Corollary}
+\theoremstyle{definition}
+\newtheorem{Def}[Thm]{Definition}
+\newtheorem{Rem}[Thm]{Remark}
+\theoremstyle{remark}
+\newtheorem{Eg}[Thm]{Example}
+
+\theoremstyle{plain}
+\newtheorem*{Thm*}{Theorem}
+\newtheorem*{Lem*}{Lemma}
+\newtheorem*{Prop*}{Proposition}
+\newtheorem*{Cor*}{Corollary}
+\theoremstyle{definition}
+\newtheorem*{Def*}{Definition}
+\newtheorem*{Rem*}{Remark}
+\theoremstyle{remark}
+\newtheorem*{Eg*}{Example}
+
+%%% log type
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\corank}{corank}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Coker}{Coker}
+%%% limit type
+\DeclareMathOperator*{\argmin}{arg~min}
+\DeclareMathOperator*{\argmax}{arg~max}
+
+% 適切な括弧を書くためのコマンド
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % | | absolute value
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert} % || || norm
+\DeclarePairedDelimiter{\rbra}{(}{)} % () round brackets
+\DeclarePairedDelimiter{\cbra}{\{}{\}} % {} curly brackets
+\DeclarePairedDelimiter{\sbra}{[}{]} % [] square brackets
+\DeclarePairedDelimiter{\abra}{\langle}{\rangle} % < > angle brackets
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor} % floor function
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil} % ceil function
+
+% ハイパーリンクの設定
+% \usepackage[%
+% 	bookmarks=true,%
+% 	bookmarksdepth=3,%
+% 	bookmarksnumbered=true,%
+% 	colorlinks=false,%
+% 	setpagesize=false,%
+% 	pdftitle={},%
+% 	pdfsubject={},%
+% 	pdfauthor={},%
+% 	pdfkeywords={}%
+% ]{hyperref}
+% PDFのしおり機能の日本語文字化けを防ぐ。
+% \usepackage{pxjahyper}
+% \usepackage{listings,jvlisting} %日本語のコメントアウトをする場合jvlisting（もしくはjlisting）が必要
+%ここからソースコードの表示に関する設定
+% \lstset{
+% 	language=Matlab,      %lt;--あるいは ,Python,MathaticaやMatlab などリスト対象の言語を指定
+% 	basicstyle={\small},%
+% 	identifierstyle={\small},%
+% 	commentstyle={\small\itshape},%
+% 	keywordstyle={\small\bfseries},%
+% 	ndkeywordstyle={\small},%
+% 	stringstyle={\small\ttfamily},
+% 	frame={tb},
+% 	breaklines=true,
+% 	columns=[l]{fullflexible},%
+% 	% numbers=left,%
+% 	xrightmargin=0zw,%
+% 	xleftmargin=3zw,%
+% 	numberstyle={\scriptsize},%
+% 	stepnumber=1,
+% 	numbersep=1zw,%
+% 	lineskip=-0.5ex%
+% }
+% 例
+%
+%   \begin{lstlisting}[caption = 可制御性行列を求める]
+%   n = length(A);
+%   MC = [];
+%   for i=1:n
+%   MC = [MC A^(i-1)*B];
+%   end
+%   \end{lstlisting}
+
+\setlength{\columnsep}{5mm}
+endsnippet
+snippet beamer "beamer template"
+\documentclass[dvipdfmx,cjk]{beamer}
+
+%\documentclass[dvipdfm,cjk]{beamer} %% オプションは環境や利用するプログラムに
+%\documentclass[dvips,cjk]{beamer}   %% よって変える
+
+%\AtBeginDvi{\special{pdf:tounicode 90ms-RKSJ-UCS2}} %% しおりが文字化けしないように
+\AtBeginDvi{\special{pdf:tounicode EUC-UCS2}}
+
+%\setbeamertemplate{navigation symbols}{} %% 右下のアイコンを消す
+
+%\usetheme{CambridgeUS}         %% theme の選択
+%\usetheme{Boadilla}           %% Beamer のディレクトリの中の
+%\usetheme{Madrid}             %% beamerthemeCambridgeUS.sty を指定
+%\usetheme{Antibes}            %% 色々と試してみるといいだろう
+%\usetheme{Montpellier}        %% サンプルが beamer\doc に色々とある。
+\usetheme{Berkeley}
+%\usetheme{Goettingen}
+%\usetheme{Singapore}
+%\usetheme{Szeged}
+
+\usecolortheme{rose}          %% colortheme を選ぶと色使いが変わる
+%\usecolortheme{albatross}
+
+%\useoutertheme{shadow}                 %% 箱に影をつける
+\usefonttheme{professionalfonts}       %% 数式の文字を通常の LaTeX と同じにする
+
+%\setbeamercovered{transparent}         %% 消えている文字をうっすらと表示する
+
+\setbeamertemplate{theorems}[numbered]  %% 定理に番号をつける
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{proposition}[thm]{Proposition}
+\theoremstyle{example}
+\newtheorem{exam}[thm]{Example}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{question}[thm]{Question}
+\newtheorem{prob}[thm]{Problem}
+
+\begin{document}
+\title[Beamer]{Beamer の使い方}
+\author[Shinshu]{信州太郎}            %% ここに書かれた情報は色々なところに使われるので
+\institute[Shinshu Univ.]{信州大学}   %% なるべく設定した方が良い
+\date{February 6, 2007}
+
+\begin{frame}                  %% \begin{frame}..\end{frame} で 1 枚のスライド
+\titlepage                     %% タイトルページ
+\end{frame}
+
+\begin{frame}                  %% 目次 (必要なければ省略)
+\tableofcontents
+\end{frame}
+
+\section{箇条書き}             %% セクション名
+\begin{frame}
+\frametitle{松本}              %% フレームタイトル
+
+\begin{itemize}
+\item 豊科\pause               %% \pause でとまる
+\item 穂高\pause
+\item 明科
+\end{itemize}
+\end{frame}
+
+\section{定理型環境}           %% 定理型環境が使える
+\begin{frame}                  %% \newtheorem で新しい環境も作れる
+\begin{thm}
+定理型環境が使える。
+使い方は普通の \LaTeX と同じ
+\end{thm}
+\pause
+
+\begin{proof}
+証明も書ける。
+\end{proof}
+\pause
+
+\begin{exam}                   %% 色が違う
+example
+\end{exam}
+\end{frame}
+
+\section{文字の色}             %% 文字の色を変える
+\begin{frame}
+\frametitle{文字の色を変えてみよう}
+{\color{red}赤}\pause
+{\color{blue}青}\pause
+{\color{green}緑}
+\end{frame}
+
+\end{document}
+endsnippet
+
+snippet begin "\begin{} \end{}"
+\begin{${1:env}}
+	${2}
+\end{$1}
+endsnippet
+
+snippet ftitle "beamer frame title"
+\section{${1:title}}
+\begin{frame}
+	\frametitle{$1}
+	${2}
+\end{frame}
+endsnippet
+
+snippet fftitle "beamer subsection frame title"
+\subsection{${1:title}}
+\begin{frame}
+	\frametitle{$1}
+	${2}
+\end{frame}
+endsnippet
+
+snippet latex "latex template"
+\documentclass[twocolumn,10pt,a4paper,dvipdfmx]{ltjsarticle}
+
+% パッケージについて https://qiita.com/mo-mo-666/items/2686488fc29c5a37832b#32-%E6%97%A5%E6%9C%AC%E8%AA%9E%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88
+
+% 表示の形式を変更
+\usepackage{geometry}
+\geometry{left=25mm, right=25mm, top=10mm, bottom=30mm}
+
+% 数式系
+\usepackage{amsthm,amsmath,amssymb,amsfonts}
+\usepackage{latexsym}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+
+% 画像系
+\usepackage[dvipdfmx]{graphicx,xcolor}
+% 図や表の配置関係
+\usepackage{float}
+% 図を回り込ませる
+\usepackage{wrapfig}
+
+% 英字フォントの設定
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% 数式で太字を使う
+\usepackage{bm}
+
+% amsthmを用いた定理環境
+% 英語のとき
+\theoremstyle{plain}
+\newtheorem{Thm}{Theorem}[section]
+\newtheorem{Lem}[Thm]{Lemma}
+\newtheorem{Prop}[Thm]{Proposition}
+\newtheorem{Cor}[Thm]{Corollary}
+\theoremstyle{definition}
+\newtheorem{Def}[Thm]{Definition}
+\newtheorem{Rem}[Thm]{Remark}
+\theoremstyle{remark}
+\newtheorem{Eg}[Thm]{Example}
+
+\theoremstyle{plain}
+\newtheorem*{Thm*}{Theorem}
+\newtheorem*{Lem*}{Lemma}
+\newtheorem*{Prop*}{Proposition}
+\newtheorem*{Cor*}{Corollary}
+\theoremstyle{definition}
+\newtheorem*{Def*}{Definition}
+\newtheorem*{Rem*}{Remark}
+\theoremstyle{remark}
+\newtheorem*{Eg*}{Example}
+
+%%% log type
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Supp}{Supp}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Det}{Det}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\corank}{corank}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\Coker}{Coker}
+%%% limit type
+\DeclareMathOperator*{\argmin}{arg~min}
+\DeclareMathOperator*{\argmax}{arg~max}
+
+% 適切な括弧を書くためのコマンド
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert} % | | absolute value
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert} % || || norm
+\DeclarePairedDelimiter{\rbra}{(}{)} % () round brackets
+\DeclarePairedDelimiter{\cbra}{\\{}{\\}} % {} curly brackets
+\DeclarePairedDelimiter{\sbra}{[}{]} % [] square brackets
+\DeclarePairedDelimiter{\abra}{\langle}{\rangle} % < > angle brackets
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor} % floor function
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil} % ceil function
+
+% ハイパーリンクの設定
+\usepackage[%
+ dvipdfmx,%
+ bookmarks=true,%
+ bookmarksdepth=3,%
+ bookmarksnumbered=true,%
+ colorlinks=false,%
+ setpagesize=false,%
+ pdftitle={},%
+ pdfsubject={},%
+ pdfauthor={},%
+ pdfkeywords={}%
+]{hyperref}
+% PDFのしおり機能の日本語文字化けを防ぐ。
+\usepackage{pxjahyper}
+\usepackage{listings,jvlisting,jlisting} %日本語のコメントアウトをする場合jvlisting（もしくはjlisting）が必要
+%ここからソースコードの表示に関する設定
+\lstset{
+  language=Matlab,      %lt;--あるいは ,Python,MathaticaやMatlab などリスト対象の言語を指定
+  basicstyle={\small},%
+  identifierstyle={\small},%
+  commentstyle={\small\itshape},%
+  keywordstyle={\small\bfseries},%
+  ndkeywordstyle={\small},%
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},%
+% numbers=left,%
+  xrightmargin=0zw,%
+  xleftmargin=3zw,%
+  numberstyle={\scriptsize},%
+  stepnumber=1,
+  numbersep=1zw,%
+  lineskip=-0.5ex%
+}
+% 例
+%
+%	\begin{lstlisting}[caption = 可制御性行列を求める]
+%	n = length(A);
+%	MC = [];
+%	for i=1:n
+%	MC = [MC A^(i-1)*B];
+%	end
+%	\end{lstlisting}
+
+\setlength{\columnsep}{5mm}
+endsnippet
+
+snippet report "report templete"
+\documentclass[twocolumn, a4paper]{ieicejsp}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{newenum}
+\usepackage{epsfig}
+\usepackage{amsmath, amssymb}
+% For [H]
+\usepackage{here}
+% For subcaption
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{setspace}
+% \captionsetup{compatibility=false}
+% \makeatletter
+% \let\@makecaption\MYcaption
+% \makeatother
+% \DeclareCaptionLabelSeparator{enspace}{\enspace}
+% \captionsetup[figure]{font={normalfont},format=plain,labelsep=enspace}
+\usepackage{url}
+% 改行しない箇条書き（paralist）
+\usepackage{paralist}
+
+\title{{\bf 進捗報告（20220610）}
+  }
+  \author{
+    }
+  \affliate{}
+
+\begin{document}
+\maketitle
+\section{はじめに}
+
+\end{document}
+endsnippet
