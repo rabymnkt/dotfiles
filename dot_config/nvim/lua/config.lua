@@ -53,12 +53,34 @@ local config = {
     sections = {
         -- these are to remove the defaults
         lualine_a = {},
-        lualine_b = {},
-        lualine_y = {},
+        lualine_b = { require("recorder").recordingStatus },
+        lualine_y = {
+            {
+                "aerial",
+                -- The separator to be used to separate symbols in status line.
+                sep = " ) ",
+
+                -- The number of symbols to render top-down. In order to render only 'N' last
+                -- symbols, negative numbers may be supplied. For instance, 'depth = -1' can
+                -- be used in order to render only current symbol.
+                depth = nil,
+
+                -- When 'dense' mode is on, icons are not rendered near their symbols. Only
+                -- a single icon that represents the kind of current symbol is rendered at
+                -- the beginning of status line.
+                dense = false,
+
+                -- The separator to be used to separate symbols in dense mode.
+                dense_sep = ".",
+
+                -- Color the symbol icons.
+                colored = true,
+            },
+        },
         lualine_z = {},
         -- These will be filled later
         lualine_c = {},
-        lualine_x = {},
+        lualine_x = { aerial },
     },
     inactive_sections = {
         -- these are to remove the defaults
@@ -701,9 +723,30 @@ require("mason-lspconfig").setup_handlers({
         require("rust-tools").setup({})
     end,
 })
-
---- noice
+---telescope
+require("telescope").setup({
+    extensions = {
+        aerial = {
+            -- Set the width of the first two columns (the second
+            -- is relevant only when show_columns is set to 'both')
+            col1_width = 4,
+            col2_width = 30,
+            -- How to format the symbols
+            format_symbol = function(symbol_path, filetype)
+                if filetype == "json" or filetype == "yaml" then
+                    return table.concat(symbol_path, ".")
+                else
+                    return symbol_path[#symbol_path]
+                end
+            end,
+            -- Available modes: symbols, lines, both
+            show_columns = "both",
+        },
+    },
+})
 require("telescope").load_extension("noice")
+require("telescope").load_extension("aerial")
+--- noice
 require("noice").setup({
     cmdline = {
         enabled = true,         -- enables the Noice cmdline UI
@@ -1090,4 +1133,76 @@ require 'nvim-treesitter.configs'.setup {
         -- disable = { "c", "ruby" },  -- optional, list of language that will be disabled
         -- [options]
     },
+}
+
+---aerial
+require("aerial").setup({
+    -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+    on_attach = function(bufnr)
+        -- Jump forwards/backwards with '{' and '}'
+        vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+        vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+    end,
+})
+-- You probably also want to set a keymap to toggle aerial
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+
+-- Indicates whether you are currently recording. Useful if you are using
+-- `cmdheight=0`, where recording-status is not visible.
+require("recorder").recordingStatus()
+
+-- Displays non-empty macro-slots (registers) and indicates the selected ones.
+-- Only displayed when *not* recording. Slots with breakpoints get an extra `#`.
+require("recorder").displaySlots()
+require("recorder").setup {
+    -- Named registers where macros are saved (single lowercase letters only).
+    -- The first register is the default register used as macro-slot after
+    -- startup.
+    slots = { "a", "b", "c" },
+
+    mapping = {
+        startStopRecording = "q",
+        playMacro = "Q",
+        switchSlot = "<C-q>",
+        editMacro = "cq",
+        deleteAllMacros = "dq",
+        yankMacro = "yq",
+        -- ⚠️ this should be a string you don't use in insert mode during a macro
+        addBreakPoint = "##",
+    },
+
+    -- Clears all macros-slots on startup.
+    clear = false,
+
+    -- Log level used for non-critical notifications; mostly relevant for nvim-notify.
+    -- (Note that by default, nvim-notify does not show the levels `trace` & `debug`.)
+    logLevel = vim.log.levels.INFO, -- :help vim.log.levels
+
+    -- If enabled, only essential notifications are sent.
+    -- If you do not use a plugin like nvim-notify, set this to `true`
+    -- to remove otherwise annoying messages.
+    lessNotifications = false,
+
+    -- Use nerdfont icons in the status bar components and keymap descriptions
+    useNerdfontIcons = true,
+
+    -- Performance optimzations for macros with high count. When `playMacro` is
+    -- triggered with a count higher than the threshold, nvim-recorder
+    -- temporarily changes changes some settings for the duration of the macro.
+    performanceOpts = {
+        countThreshold = 100,
+        lazyredraw = true,        -- enable lazyredraw (see `:h lazyredraw`)
+        noSystemClipboard = true, -- remove `+`/`*` from clipboard option
+        autocmdEventsIgnore = {   -- temporarily ignore these autocmd events
+            "TextChangedI",
+            "TextChanged",
+            "InsertLeave",
+            "InsertEnter",
+            "InsertCharPre",
+        },
+    },
+
+    -- [experimental] partially share keymaps with nvim-dap.
+    -- (See README for further explanations.)
+    dapSharedKeymaps = false,
 }
