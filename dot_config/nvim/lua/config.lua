@@ -1206,3 +1206,5 @@ require("recorder").setup {
     -- (See README for further explanations.)
     dapSharedKeymaps = false,
 }
+
+require("notify").history()
