@@ -24,6 +24,9 @@ vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references")
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
+-- unicode from codepoint
+map('i', '<C-v>u', '<C-r>=nr2char(0x)<Left>', opts)
+
 -- Move to previous/next
 map('n', '<C-h>', '<Cmd>BufferPrevious<CR>', opts)
 map('n', '<C-l>', '<Cmd>BufferNext<CR>', opts)
