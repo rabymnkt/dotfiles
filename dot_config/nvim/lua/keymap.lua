@@ -96,3 +96,6 @@ vim.api.nvim_set_keymap('n', '<leader>dl', ':lua require("dap").run_last()<CR>',
 
 --- nvim-dap-ui
 vim.api.nvim_set_keymap('n', '<leader>d', ':lua require("dapui").toggle()<CR>', {})
+
+--- check full path
+vim.api.nvim_set_keymap('n', '<leader>p', ':echo expand("%:p")<CR>', {})
