@@ -69,20 +69,26 @@ M.config = function()
     -- Set up lspconfig.
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-    require'lspconfig'.pylsp.setup{
+
+    -- pylsp
+    require 'lspconfig'.pylsp.setup {
         capabilities = capabilities,
         settings = {
             pylsp = {
                 plugins = {
                     pycodestyle = {
-                        ignore = {'W391'},
+                        ignore = { 'W391' },
                         maxLineLength = 200
                     }
                 }
             }
         }
     }
-    require'lspconfig'.clangd.setup{
+
+    -- ruff
+    require 'lspconfig'.ruff.setup({ capabilities = capabilities })
+
+    require 'lspconfig'.clangd.setup {
         capabilities = capabilities
     }
 end
