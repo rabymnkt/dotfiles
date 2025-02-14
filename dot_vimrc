@@ -47,7 +47,7 @@ endif
 " airlineの設定
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#default#layout = [[ 'a', 'b', 'c' ], ['x', 'y']] 
+let g:airline#extensions#default#layout = [[ 'a', 'b', 'c' ], ['x', 'y']]
 let g:airline_section_c = '%t %M'
 " タブラインの表示を変更する
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -173,7 +173,7 @@ set matchpairs+=（:）,「:」,『:』,【:】,［:］,＜:＞
 
 " クリップボード連携設定
 set clipboard&
-set clipboard^=unnamedplus
+set clipboard+=unnamedplus
 
 syntax on
 set t_Co=256
@@ -303,6 +303,8 @@ if has('vim_starting')
 endif
 
 hi Comment ctermfg=blue guifg=blue
+
+inoremap <C-v>u <C-r>=nr2char(0x)<Left>
 
 if has('mouse')
   set mouse=a
