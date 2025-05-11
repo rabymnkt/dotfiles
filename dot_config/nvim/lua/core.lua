@@ -32,11 +32,11 @@ vim.opt.wrapscan = true
 
 -- カーソル移動
 -- 削除時の対象
-vim.opt.backspace = 'start', 'eol', 'indent'
+vim.opt.backspace = "start", "eol", "indent"
 
 -- ファイル環境
 -- -フォーマット
-vim.opt.fileformats =  "unix", "mac", "dos"
+vim.opt.fileformats = "unix", "mac", "dos"
 
 -- クリップボード連携
 --vim.opt.clipboard:append({unnamedeplus = true})
