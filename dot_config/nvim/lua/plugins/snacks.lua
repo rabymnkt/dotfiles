@@ -4,11 +4,12 @@ return {
     -- "echasnovski/mini.icons",
     priority = 1000,
     lazy = false,
+    enabled = true,
     ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
         dashboard = { enabled = false },
-        explorer = { enabled = true },
+        explorer = { enabled = false },
         indent = {
             enabled = true,
             animate = {

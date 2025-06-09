@@ -1,17 +1,18 @@
--- terminalmodeから抜ける
+-- terminalmode から抜ける
 vim.keymap.set("t", "<ESC>", "<C-\\><C-n>")
 
 -- core
 vim.keymap.set("n", "<ESC><ESC>", ":<C-u>nohlsearch<CR><Esc>")
 
 -- telescope.lua
--- local builtin = require('telescope.builtin')
--- vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
--- vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
--- vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
--- vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
--- vim.keymap.set('n', '<leader>f/', builtin.current_buffer_fuzzy_find, {})
--- vim.keymap.set('n', '<leader>fn', ":Noice telescope<CR>")
+-- local builtin = require("telescope.builtin")
+-- vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
+-- vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+-- vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+-- vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+-- vim.keymap.set("n", "<leader>f/", builtin.current_buffer_fuzzy_find, {})
+-- vim.keymap.set("n", "<leader>fn", ":Noice telescope<CR>")
+
 -- trouble.lua
 vim.keymap.set("n", "<leader>xx", function()
     require("trouble").toggle()
@@ -115,10 +116,14 @@ vim.api.nvim_set_keymap("n", "<leader>dr", ':lua require("dap").repl.open()<CR>'
 vim.api.nvim_set_keymap("n", "<leader>dl", ':lua require("dap").run_last()<CR>', { silent = true })
 
 --- nvim-dap-ui
-vim.api.nvim_set_keymap("n", "<leader>d", ':lua require("dapui").toggle()<CR>', {})
+vim.api.nvim_set_keymap("n", "<leader>dg", ':lua require("dapui").toggle()<CR>', {})
 
 --- check full path
 vim.api.nvim_set_keymap("n", "<leader>p", ':echo expand("%:p")<CR>', {})
 
 --- check snacks history
 vim.api.nvim_set_keymap("n", "<leader>nh", ":lua Snacks.notifier.show_history()<CR>", {})
+
+--- markdown
+vim.api.nvim_set_keymap("n", "<leader>mm", ":ZenkakuSpaceFix<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>mc", ":ZenkakuSpaceFix interactive<CR>", {})
