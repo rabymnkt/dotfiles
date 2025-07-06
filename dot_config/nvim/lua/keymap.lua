@@ -112,11 +112,11 @@ vim.api.nvim_set_keymap(
     ':lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>',
     { silent = true }
 )
-vim.api.nvim_set_keymap("n", "<leader>dr", ':lua require("dap").repl.open()<CR>', { silent = true })
-vim.api.nvim_set_keymap("n", "<leader>dl", ':lua require("dap").run_last()<CR>', { silent = true })
-
---- nvim-dap-ui
-vim.api.nvim_set_keymap("n", "<leader>dg", ':lua require("dapui").toggle()<CR>', {})
+-- vim.api.nvim_set_keymap("n", "<leader>dr", ':lua require("dap").repl.open()<CR>', { silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>dl", ':lua require("dap").run_last()<CR>', { silent = true })
+--
+-- --- nvim-dap-ui
+-- vim.api.nvim_set_keymap("n", "<leader>dg", ':lua require("dapui").toggle()<CR>', {})
 
 --- check full path
 vim.api.nvim_set_keymap("n", "<leader>p", ':echo expand("%:p")<CR>', {})
@@ -127,3 +127,10 @@ vim.api.nvim_set_keymap("n", "<leader>nh", ":lua Snacks.notifier.show_history()<
 --- markdown
 vim.api.nvim_set_keymap("n", "<leader>mm", ":ZenkakuSpaceFix<CR>", {})
 vim.api.nvim_set_keymap("n", "<leader>mc", ":ZenkakuSpaceFix interactive<CR>", {})
+
+--- skkeleton
+vim.keymap.set({ "i", "c" }, "<C-j>", "<Plug>(skkeleton-toggle)", { noremap = false })
+-- vim.keymap.set({ "i", "c" }, "<C-n>", "<cmd>call pum#map#insert_relative(+1)<CR>")
+-- vim.keymap.set({ "i", "c" }, "<C-p>", "<cmd>call pum#map#insert_relative(-1)<CR>")
+-- vim.keymap.set({ "i", "c" }, "<C-y>", "<cmd>call pum#map#confirm()<CR>")
+-- vim.keymap.set({ "i", "c" }, "<C-e>", "<cmd>call pum#map#cancel()<CR>")

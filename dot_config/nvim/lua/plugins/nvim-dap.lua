@@ -1,6 +1,7 @@
 return {
-    'mfussenegger/nvim-dap',
-    'rcarriga/nvim-dap-ui',
+    enabled = false,
+    "mfussenegger/nvim-dap",
+    "rcarriga/nvim-dap-ui",
     "nvim-neotest/nvim-nio",
-    'mfussenegger/nvim-dap-python'
+    "mfussenegger/nvim-dap-python",
 }
