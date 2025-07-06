@@ -6,7 +6,7 @@ return {
         -- "Shougo/pum.vim",
         -- "Shougo/ddc-ui-pum",
         "Shougo/ddc-ui-native",
-        "delphinus/skkeleton_indicator.nvim",
+        -- "delphinus/skkeleton_indicator.nvim",
     },
     config = function()
         vim.fn["skkeleton#config"]({

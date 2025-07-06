@@ -683,7 +683,6 @@ require("mason").setup({
         },
     },
 })
-require("mason-lspconfig").setup()
 
 ---telescope
 -- require("telescope").setup({
@@ -1396,4 +1395,4 @@ require("oil").setup({
     },
 })
 
-require("skkeleton_indicator").setup()
+-- require("skkeleton_indicator").setup()
