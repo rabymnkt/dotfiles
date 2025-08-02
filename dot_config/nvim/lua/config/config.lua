@@ -1408,6 +1408,12 @@ vim.api.nvim_create_user_command("CJKspace", function()
         return
     end
 
+    -- 変更があって未保存の場合
+    if vim.api.nvim_buf_get_option(0, "modified") then
+        print("ファイルは未保存です。保存してから再度実行してください。")
+        return
+    end
+
     -- バイナリのパスを指定（ここは実際のパスに置き換えてください）
     local binary = "~/.local/bin/cjk-space"
 
