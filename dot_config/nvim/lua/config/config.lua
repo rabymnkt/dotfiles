@@ -1273,7 +1273,7 @@ require("oil").setup({
     use_default_keymaps = true,
     view_options = {
         -- Show files and directories that start with "."
-        show_hidden = false,
+        show_hidden = true,
         -- This function defines what is considered a "hidden" file
         is_hidden_file = function(name, bufnr)
             local m = name:match("^%.")
@@ -1396,3 +1396,34 @@ require("oil").setup({
 })
 
 -- require("skkeleton_indicator").setup()
+
+-- load my binary
+
+vim.api.nvim_create_user_command("CJKspace", function()
+    -- 現在編集中のファイルのフルパスを取得
+    local filepath = vim.api.nvim_buf_get_name(0)
+
+    if filepath == "" then
+        print("ファイルが保存されていません。先に保存してください。")
+        return
+    end
+
+    -- バイナリのパスを指定（ここは実際のパスに置き換えてください）
+    local binary = "~/.local/bin/cjk-space"
+
+    -- 外部コマンド実行：バイナリ filepath filepath
+    -- system() はコマンド終了まで同期で待つ
+    local cmd = string.format("%s %q %q", binary, filepath, filepath)
+    local result = vim.fn.system(cmd)
+
+    -- 実行結果やエラーを表示（必要に応じて）
+    local exit_code = vim.v.shell_error
+    if exit_code ~= 0 then
+        print("バイナリの実行に失敗しました。")
+        print(result)
+    else
+        print("バイナリ実行完了。")
+        -- 変更ファイルを再読み込み
+        vim.cmd("edit!")
+    end
+end, { desc = "Call external binary on current file with overwrite" })
