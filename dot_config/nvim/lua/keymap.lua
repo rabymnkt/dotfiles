@@ -173,3 +173,18 @@ end, { noremap = true, silent = true })
 --         print("textlint --fix failed")
 --     end
 -- end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>tt", function()
+  local filename = vim.api.nvim_buf_get_name(0)
+  local output = vim.fn.systemlist("textlint --fix --config ~/.textlintrc.spacing.json " .. vim.fn.shellescape(filename))
+  local code = vim.v.shell_error
+  local msg = table.concat(output, "\n")
+  if code == 0 then
+    -- Reload the buffer to reflect changes after successful fix
+    vim.cmd("edit!")
+    print("textlint --fix applied successfully.")
+  else
+    -- Display actual error message if fix failed
+    print("textlint --fix failed:\n" .. msg)
+  end
+end, { noremap = true, silent = true })
