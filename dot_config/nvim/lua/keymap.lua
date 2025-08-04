@@ -134,3 +134,42 @@ vim.keymap.set({ "i", "c" }, "<C-j>", "<Plug>(skkeleton-toggle)", { noremap = fa
 -- vim.keymap.set({ "i", "c" }, "<C-p>", "<cmd>call pum#map#insert_relative(-1)<CR>")
 -- vim.keymap.set({ "i", "c" }, "<C-y>", "<cmd>call pum#map#confirm()<CR>")
 -- vim.keymap.set({ "i", "c" }, "<C-e>", "<cmd>call pum#map#cancel()<CR>")
+
+vim.keymap.set("n", "<leader>tl", function()
+    local filename = vim.api.nvim_buf_get_name(0)
+    local output = vim.fn.systemlist("textlint " .. vim.fn.shellescape(filename))
+    -- バッファを作成（buflisted=trueにしてリストに掲載）
+    local buf = vim.api.nvim_create_buf(true, false)
+    -- 出力をバッファにセット
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, output)
+    -- 浮動ウィンドウを開いてバッファ表示
+    local width = math.floor(vim.o.columns * 0.7)
+    local height = math.floor(vim.o.lines * 0.7)
+    local row = math.floor((vim.o.lines - height) / 2)
+    local col = math.floor((vim.o.columns - width) / 2)
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = "editor",
+        row = row,
+        col = col,
+        width = width,
+        height = height,
+        style = "minimal",
+        border = "rounded",
+    })
+    -- ファイルタイプやその他オプションも設定可能
+    vim.api.nvim_buf_set_option(buf, "filetype", "text")
+end, { noremap = true, silent = true })
+
+-- vim.keymap.set("n", "<leader>tf", function()
+--     local filename = vim.api.nvim_buf_get_name(0)
+--     local output = vim.fn.systemlist("textlint --fix " .. vim.fn.shellescape(filename))
+--
+--     print(table.concat(output, "\n"))
+--
+--     local code = vim.v.shell_error
+--     if code == 0 then
+--         vim.cmd("edit!") -- ファイル再読み込み
+--     else
+--         print("textlint --fix failed")
+--     end
+-- end, { noremap = true, silent = true })
