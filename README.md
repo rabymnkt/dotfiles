@@ -42,6 +42,21 @@ If you use `-n` option, you can apply changes in dry-run mode.
 
 ## textlint
 
+- textlint-rule-no-mix-dearu-desumasu
+- textlint-rule-no-doubled-joshi
+- textlint-rule-no-double-negative-ja
+- textlint-rule-no-hankaku-kana
+- textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet
+- textlint-rule-ja-no-redundant-expression
+- textlint-rule-no-dropping-the-ra
+- textlint-rule-no-doubled-conjunctive-particle-ga
+- textlint-rule-no-doubled-conjunction
+- textlint-rule-prefer-tari-tari
+- @textlint-ja/textlint-rule-no-synonyms
+- textlint-rule-ja-no-orthographic-variants
+- textlint-rule-ja-space-between-half-and-full-width
+- textlint-rule-sentence-length
+
 ```shell
 npm -g install  textlint-rule-no-mix-dearu-desumasu textlint-rule-no-doubled-joshi textlint-rule-no-double-negative-ja textlint-rule-no-hankaku-kana textlint-rule-no-mixed-zenkaku-and-hankaku-alphabet textlint-rule-ja-no-redundant-expression textlint-rule-no-dropping-the-ra textlint-rule-no-doubled-conjunctive-particle-ga textlint-rule-no-doubled-conjunction textlint-rule-prefer-tari-tari @textlint-ja/textlint-rule-no-synonyms textlint-rule-ja-no-orthographic-variants textlint-rule-ja-space-between-half-and-full-width textlint-rule-sentence-length
 ```
