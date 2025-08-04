@@ -1,0 +1,22 @@
+{
+    "rules": {
+        "sentence-length": {
+            "max": 120,
+        },
+        "ja-space-between-half-and-full-width": {
+            "space": "always",
+        },
+        "no-mix-dearu-desumasu": true,
+        "no-doubled-joshi": true,
+        "no-double-negative-ja": true,
+        "no-hankaku-kana": true,
+        "no-mixed-zenkaku-and-hankaku-alphabet": true,
+        "ja-no-redundant-expression": true,
+        "no-dropping-the-ra": true,
+        "no-doubled-conjunctive-particle-ga": true,
+        "no-doubled-conjunction": true,
+        "prefer-tari-tari": true,
+        "@textlint-ja/no-synonyms": true,
+        "ja-no-orthographic-variants": true,
+    }
+}
