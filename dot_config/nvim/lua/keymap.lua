@@ -175,6 +175,12 @@ end, { noremap = true, silent = true })
 -- end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>tt", function()
+  -- Check if the current buffer is modified (unsaved changes exist)
+  if vim.bo.modified then
+    print("Please save the file before running textlint --fix.")
+    return
+  end
+
   local filename = vim.api.nvim_buf_get_name(0)
   local output = vim.fn.systemlist("textlint --fix --config ~/.textlintrc.spacing.json " .. vim.fn.shellescape(filename))
   local code = vim.v.shell_error
